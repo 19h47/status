@@ -21,7 +21,7 @@ Locate the `config-sample.php`, fill it with your personal informations and then
 ### Plugin
 
 - Upload the folder `status` to the `/wp-content/plugins/` directory
-- Activate the plugin through the 'Plugins' menu in WordPress
+- Activate the plugin through the __Plugins__ menu in WordPress
 
 ## References
 
