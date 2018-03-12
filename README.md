@@ -2,7 +2,7 @@
 
 A __WordPress__ plugin to turn your tweets into WordPress posts.
 
-![Status](screenshot.png)
+![Status](assets/screenshot.png)
 
 ## Installation
 
