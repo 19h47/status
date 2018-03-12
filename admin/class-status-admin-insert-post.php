@@ -96,14 +96,22 @@ class Status_Admin_Insert_Post {
           		$tweet_text = preg_replace( $hashFindPattern, $hashReplace, $tweet_text );
           	}
 
+          	$date = date_i18n(
+          		'Y-m-d H:i:s',
+          		strtotime( $tweet->created_at ) + $tweet->user->utc_offset
+          	);
+
 
             // postarr
 			$postarr = array(
-				'post_author'	=> 1,
-				'post_content'	=> $tweet_text,
-				'post_date'		=> date_i18n( 'Y-m-d H:i:s', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ),
-				'post_title'	=> $post_title,
-				'post_type'		=> 'tweet',
+				'post_author'		=> 1,
+				'post_content'		=> $tweet_text,
+				'post_date'			=> $date,
+				'post_date_gmt'		=> $date,
+				'post_modified'		=> $date,
+				'post_modified_gmt'	=> $date,
+				'post_title'		=> $post_title,
+				'post_type'			=> 'tweet',
 			);
 			$post_id = wp_insert_post( $postarr, true );
 
