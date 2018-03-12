@@ -53,6 +53,7 @@ class Status_Loader {
 
 		$this->actions = array();
 		$this->filters = array();
+		$this->shortcodes = array();
 	}
 
 
@@ -70,6 +71,26 @@ class Status_Loader {
 		$this->actions = $this->add(
 			$this->actions,
 			$hook,
+			$component,
+			$callback,
+			$priority,
+			$accepted_args
+		);
+	}
+
+
+	/**
+	 * Add a new shortcode to the collection to be registered with WordPress
+	 *
+	 * @since     1.0.0
+	 * @param     string        $tag           The name of the new shortcode.
+	 * @param     object        $component      A reference to the instance of the object on which the shortcode is defined.
+	 * @param     string        $callback       The name of the function that defines the shortcode.
+	 */
+	public function add_shortcode( $tag, $component, $callback, $priority = 10, $accepted_args = 1 ) {
+		$this->shortcodes = $this->add(
+			$this->shortcodes,
+			$tag,
 			$component,
 			$callback,
 			$priority,
@@ -159,5 +180,14 @@ class Status_Loader {
 				$hook['accepted_args']
 			);
 		}
+
+		foreach ( $this->shortcodes as $hook ) {
+    		add_shortcode(
+    			$hook['hook'],
+    			array( $hook['component'],
+    				$hook['callback']
+    			)
+    		);
+        }
 	}
 }
