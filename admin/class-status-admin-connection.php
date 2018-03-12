@@ -91,10 +91,10 @@ class Status_Admin_Connection {
 	        }
        	}
 
-		$user = $connection->get( 'users/show', [ 'screen_name'	=> '19h47' ] );
+		$user = $connection->get( 'users/show', [ 'screen_name'	=> $config['screen_name'] ] );
 
 		$args_content = array(
-			'screen_name' 	=> '19h47',
+			'screen_name' 	=> $config['screen_name'],
 			'count'			=> $user->statuses_count,
 			'include_rts'	=> false,
 		);

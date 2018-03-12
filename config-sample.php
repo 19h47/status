@@ -11,13 +11,13 @@
  */
 
 return $config = array(
-	'consumer' 	=> array(
+	'consumer' 		=> array(
 		'key' 			=> 'YOUR_CONSUMER_KEY',
-		'secret' 		=> 'YOUR_CONSUMER_SECRET',
-
+		'secret' 		=> 'YOUR_CONSUMER_SECRET'
 	),
-	'access' 	=> array(
+	'access' 		=> array(
 		'token' 		=> 'YOUR_ACCESS_TOKEN',
-		'token_secret' 	=> 'YOUR_TOKEN_SECRET',
+		'token_secret' 	=> 'YOUR_TOKEN_SECRET'
 	),
+	'screen_name'	=> 'USER'
 );
