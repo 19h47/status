@@ -19,3 +19,4 @@ Locate the `config-sample.php`, fill it with your personal informations and then
 ## References
 
 - [Import Tweets as Posts](https://github.com/chandanonline4u/import-tweets-as-posts)
+- [WordPress plugin boilerplate](https://github.com/DevinVinson/WordPress-Plugin-Boilerplate)
