@@ -15,3 +15,7 @@ Locate the `config-sample.php`, fill it with your personal informations and then
 
 1. Upload the folder `status` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
+
+## References
+
+- [Import Tweets as Posts](https://github.com/chandanonline4u/import-tweets-as-posts)
