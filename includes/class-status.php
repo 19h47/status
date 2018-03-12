@@ -221,23 +221,23 @@ class Status {
 
 		$plugin_post_type = new Status_Admin_Post_Type( $this->get_plugin_name(), $this->get_version() );
 
-    		$this->loader->add_action( 'init', $plugin_post_type, 'register_post_type' );
-        	$this->loader->add_action( 'admin_head', $plugin_post_type, 'css' );
+			$this->loader->add_action( 'init', $plugin_post_type, 'register_post_type' );
+			$this->loader->add_action( 'admin_head', $plugin_post_type, 'css' );
 
-        	$this->loader->add_filter( 'dashboard_glance_items', $plugin_post_type, 'at_a_glance' );
-        	$this->loader->add_filter(
-        		'manage_tweet_posts_columns',
-        		$plugin_post_type,
-        		'add_custom_columns'
-        	);
+			$this->loader->add_filter( 'dashboard_glance_items', $plugin_post_type, 'at_a_glance' );
+			$this->loader->add_filter(
+				'manage_tweet_posts_columns',
+				$plugin_post_type,
+				'add_custom_columns'
+			);
 
-		$this->loader->add_action(
-			'manage_tweet_posts_custom_column',
-			$plugin_post_type,
-			'render_custom_columns',
-			10,
-			2
-		);
+			$this->loader->add_action(
+				'manage_tweet_posts_custom_column',
+				$plugin_post_type,
+				'render_custom_columns',
+				10,
+				2
+			);
 	}
 
 
@@ -261,7 +261,10 @@ class Status {
 	 */
 	private function define_connection() {
 
-		$plugin_connection = new Status_Admin_Connection( $this->get_plugin_name(), $this->get_version() );
+		$plugin_connection = new Status_Admin_Connection(
+			$this->get_plugin_name(),
+			$this->get_version()
+		);
 
 		$this->tweets = $plugin_connection::connection( $this->config );
 	}
@@ -273,7 +276,10 @@ class Status {
 	 */
 	private function define_insert_post() {
 
-		$plugin_insert_post = new Status_Admin_Insert_Post( $this->get_plugin_name(), $this->get_version(), $this->tweets );
+		$plugin_insert_post = new Status_Admin_Insert_Post(
+			$this->get_plugin_name(),
+			$this->get_version(), $this->tweets
+		);
 
 		$this->loader->add_action(
 			'import_tweets_as_posts',
@@ -291,7 +297,10 @@ class Status {
 	 */
 	private function define_metabox_hooks() {
 
-		$plugin_metaboxes = new Status_Admin_Metaboxes( $this->get_plugin_name(), $this->get_version() );
+		$plugin_metaboxes = new Status_Admin_Metaboxes(
+			$this->get_plugin_name(),
+			$this->get_version()
+		);
 
 		$this->loader->add_action( 'add_meta_boxes', $plugin_metaboxes, 'add_metaboxes' );
 	}
