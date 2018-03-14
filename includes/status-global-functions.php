@@ -10,6 +10,8 @@
  * @subpackage 	Status/includes
  */
 
+if ( ! function_exists( 'insert_attachment_from_url' ) ) :
+
 /**
  * Insert an attachment from an URL address.
  *
@@ -67,3 +69,5 @@ function insert_attachment_from_url( $url, $post_id = null ) {
 
 	return $attach_id;
 }
+
+endif;
