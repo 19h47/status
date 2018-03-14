@@ -76,7 +76,7 @@ class Status_Admin_Post_Type {
         	'update_item'           => __( 'Mettre à jour le tweet', $this->plugin_name ),
         	'view_item'             => __( 'Voir le tweet', $this->plugin_name ),
         	'view_items'            => __( 'Voir les tweets', $this->plugin_name ),
-        	'search_items'          => __( 'Chercher parmi les témoignages', $this->plugin_name ),
+        	'search_items'          => __( 'Chercher parmi les tweets', $this->plugin_name ),
         	'not_found'             => __( 'Aucun tweet trouvé.', $this->plugin_name ),
         	'not_found_in_trash'    => __( 'Aucun tweet trouvé dans la corbeille.', $this->plugin_name ),
         	'featured_image'        => __( 'Image à la une', $this->plugin_name ),

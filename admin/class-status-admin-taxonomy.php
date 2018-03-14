@@ -60,7 +60,7 @@ class Status_Admin_Taxonomy {
 	function register_taxonomy() {
 		$labels = array(
 			'name'                       	=> _x( 'Hashtags', 'Taxonomy General Name', $this->plugin_name ),
-			'singular_name'              	=> _x( 'Catégorie de témoignage', 'Taxonomy Singular Name', $this->plugin_name ),
+			'singular_name'              	=> _x( 'Hashtag', 'Taxonomy Singular Name', $this->plugin_name ),
 			'menu_name'                  	=> __( 'Hashtags', $this->plugin_name ),
 			'all_items'                  	=> __( 'Toutes les hashtags', $this->plugin_name ),
 			'parent_item'                	=> __( 'Hashtag parent', $this->plugin_name ),
@@ -72,10 +72,10 @@ class Status_Admin_Taxonomy {
 			'view_item'                  	=> __( 'Voir le hashtag', $this->plugin_name ),
 			'separate_items_with_commas'	=> __( 'Séparer les hashtags par des virgules', $this->plugin_name ),
 			'add_or_remove_items'        	=> __( 'Ajouter ou supprimer un hashtag', $this->plugin_name ),
-			'choose_from_most_used'      	=> __( 'Choisir parmi les hashtags les plus utilisées', $this->plugin_name ),
+			'choose_from_most_used'      	=> __( 'Choisir parmi les hashtags les plus utilisés', $this->plugin_name ),
 			'popular_items'              	=> __( 'Hashtag populaire', $this->plugin_name ),
-			'search_items'               	=> __( 'Hahstag recherchés', $this->plugin_name ),
-			'not_found'                  	=> __( 'Aucune hashtag n\'a été trouvé', $this->plugin_name ),
+			'search_items'               	=> __( 'Hashtag recherchés', $this->plugin_name ),
+			'not_found'                  	=> __( 'Aucun hashtag n\'a été trouvé', $this->plugin_name ),
 			'no_terms'                   	=> __( 'Pas de hashtag', $this->plugin_name ),
 			'items_list'                 	=> __( 'Liste des hashtags', $this->plugin_name ),
 			'items_list_navigation'      	=> __( 'Liste de navigation des hashtags', $this->plugin_name ),
