@@ -4,6 +4,10 @@ A __WordPress__ plugin to turn your tweets into WordPress posts.
 
 ![Status](assets/screenshot.png)
 
+## Description
+
+__Status__ allow you to turn your tweets into a custom post type Tweet.
+
 ## Installation
 
 ### Dependencies
@@ -29,3 +33,4 @@ Locate the `config-sample.php`, fill it with your personal informations and then
 - [WordPress plugin boilerplate](https://github.com/DevinVinson/WordPress-Plugin-Boilerplate)
 - [Twitter Developers](https://developer.twitter.com/)
 - [Twitter Application Management](https://apps.twitter.com/)
+- [Insert attachment from url](https://gist.github.com/m1r0/f22d5237ee93bcccb0d9)
