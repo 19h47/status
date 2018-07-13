@@ -63,16 +63,16 @@ class Status_Admin_Metaboxes {
 	public function add_metaboxes() {
 
 		add_meta_box(
-		    'status_tweet_additional_information',
-		    apply_filters(
-		    	$this->plugin_name . '-metabox-tweet-additional-information',
-		    	esc_html__( 'Additional Information', 'status' )
-		    ),
-		    array( $this, 'metabox' ),
-		    'tweet',
-		    'side',
-		    'default',
-		    array(
+			'status_tweet_additional_information',
+			apply_filters(
+				$this->plugin_name . '-metabox-tweet-additional-information',
+				esc_html__( 'Additional Information', 'status' )
+			),
+			array( $this, 'metabox' ),
+			'tweet',
+			'side',
+			'default',
+			array(
 				'file' => 'tweet-additional-information'
 			)
 		);
