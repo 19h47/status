@@ -2,4 +2,5 @@
 /dist/
 /vendor/
 config.php
+config.json
 sftp-config.json

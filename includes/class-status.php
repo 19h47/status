@@ -86,7 +86,10 @@ class Status {
 			$this->version = '1.0.0';
 		}
 		$this->plugin_name = 'status';
-		$this->config = include plugin_dir_path( dirname( __FILE__ ) ) . 'config.php';
+		$this->config = json_decode(
+			file_get_contents( __DIR__ . '/../config.json' ),
+			true
+		);
 
 		$this->load_dependencies();
 		$this->set_locale();
