@@ -278,7 +278,8 @@ class Status {
 
 		$plugin_insert_post = new Status_Admin_Insert_Post(
 			$this->get_plugin_name(),
-			$this->get_version(), $this->tweets
+			$this->get_version(),
+			$this->tweets
 		);
 
 		$this->loader->add_action(
