@@ -20,7 +20,7 @@ composer require abraham/twitteroauth
 
 ### Config
 
-Locate the `config-sample.php`, fill it with your personal informations and then saving it as `config.php`.
+Locate the `config-sample.json`, fill it with your personal informations and then saving it as `config.json`.
 
 ### Plugin
 
