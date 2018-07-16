@@ -116,7 +116,7 @@ class Status_Admin_Post_Type {
 			'has_archive'			=> true,
 			'exclude_from_search'	=> false,
 			'publicly_queryable'	=> true,
-			'rewrite'					=> $rewrite,
+			'rewrite'				=> $rewrite,
 			'capability_type'		=> 'post',
 		);
 		register_post_type( 'tweet', $args );
@@ -151,8 +151,6 @@ class Status_Admin_Post_Type {
 				vertical-align: middle;
 
 				height: auto;
-
-
 			}
 		</style>
 	<?php
