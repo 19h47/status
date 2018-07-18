@@ -110,6 +110,7 @@ class Status_Admin_Post_Type {
 			'show_in_menu'			=> true,
 			'show_in_admin_bar'		=> true,
 			'show_in_rest'			=> true,
+			'rest_base'             => 'tweet',
 			'menu_position'			=> 5,
 			'menu_icon'				=> 'dashicons-twitter',
 			'can_export'			=> true,
@@ -252,5 +253,19 @@ class Status_Admin_Post_Type {
 		}
 
 		return $items;
+	}
+
+
+	/**
+	 * Register REST route
+	 */
+	function register_rest_route() {
+		register_rest_route( 
+			'wp/v2', 
+			'/tweet/', 
+			array(
+				'methods'   => 'GET'
+			) 
+		);
 	}
 }

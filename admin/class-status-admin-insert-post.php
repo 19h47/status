@@ -74,35 +74,35 @@ class Status_Admin_Insert_Post {
 		foreach ( $this->tweets as $tweet ) {
 
 			$tweet_id = abs( (int) $tweet->id );
-          	$post_exist = get_posts(
-          		array(
-		            'post_type' 	=> 'tweet',
-		            'post_status' 	=> 'any',
-		            'meta_key' 		=> '_tweet_id',
-		            'meta_value' 	=> $tweet_id,
-	          	)
-          	);
-          	if ( $post_exist ) continue; // Do Nothing
+			$post_exist = get_posts(
+				array(
+					'post_type' 	=> 'tweet',
+					'post_status' 	=> 'any',
+					'meta_key' 		=> '_tweet_id',
+					'meta_value' 	=> $tweet_id,
+				)
+			);
+			if ( $post_exist ) continue; // Do Nothing
 
 
-          	$tweet_text = $this->text( $tweet->text );
-          	$tweet_text = $this->follow( $tweet_text );
-          	$post_title = $this->title( $tweet->text );
+			$tweet_text = $this->text( $tweet->text );
+			$tweet_text = $this->follow( $tweet_text );
+			$post_title = $this->title( $tweet->text );
 
-          	foreach ( $tweet->entities->hashtags as $hashtag ) {
-          		$hashFindPattern = "/#" . $hashtag->text . "/";
-          		$hashUrl = 'https://twitter.com/hashtag/' . $hashtag->text . '?src=hash';
-          		$hashReplace = '<a href="' . $hashUrl . '" target="_blank">#' . $hashtag->text .'</a>';
-          		$tweet_text = preg_replace( $hashFindPattern, $hashReplace, $tweet_text );
-          	}
+			foreach ( $tweet->entities->hashtags as $hashtag ) {
+				$hashFindPattern = "/#" . $hashtag->text . "/";
+				$hashUrl = 'https://twitter.com/hashtag/' . $hashtag->text . '?src=hash';
+				$hashReplace = '<a href="' . $hashUrl . '" target="_blank">#' . $hashtag->text .'</a>';
+				$tweet_text = preg_replace( $hashFindPattern, $hashReplace, $tweet_text );
+			}
 
-          	$date = date_i18n(
-          		'Y-m-d H:i:s',
-          		strtotime( $tweet->created_at ) + $tweet->user->utc_offset
-          	);
+			$date = date_i18n(
+				'Y-m-d H:i:s',
+				strtotime( $tweet->created_at ) + $tweet->user->utc_offset
+			);
 
 
-            // postarr
+			// postarr
 			$postarr = array(
 				'post_author'		=> 1,
 				'post_content'		=> $tweet_text,
@@ -142,9 +142,9 @@ class Status_Admin_Insert_Post {
 
 		// Convert url to HTML link
 		$link_pattern = "/(http|https)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/[^\s\…\.]*)?/";
-      	$link_replace = '<a href="${0}" target="_blank">${0}</a>';
+		$link_replace = '<a href="${0}" target="_blank">${0}</a>';
 
-      	return preg_replace( $link_pattern, $link_replace, $tweet_text );
+		return preg_replace( $link_pattern, $link_replace, $tweet_text );
 	}
 
 
@@ -158,9 +158,9 @@ class Status_Admin_Insert_Post {
 
 		// Convert @ to follow
 		$follow_pattern = '/(@([_a-z0-9\-]+))/i';
-      	$follow_replace = '<a href="https://twitter.com/${0}" target="_blank">${0}</a>';
+		$follow_replace = '<a href="https://twitter.com/${0}" target="_blank">${0}</a>';
 
-      	return preg_replace( $follow_pattern, $follow_replace, $tweet_text );
+		return preg_replace( $follow_pattern, $follow_replace, $tweet_text );
 	}
 
 
@@ -175,11 +175,11 @@ class Status_Admin_Insert_Post {
 		$link_pattern = "/(http|https)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/[^\s\…\.]*)?/";
 		$post_title = preg_replace( $link_pattern, '', $tweet_text );
 
-      	if ( strlen( $post_title ) >= 60 ) {
-          	substr( $post_title, 0, 60 ) . '...';
-        }
+		if ( strlen( $post_title ) >= 60 ) {
+			substr( $post_title, 0, 60 ) . '...';
+		}
 
-        return $post_title;
+		return $post_title;
 	}
 
 

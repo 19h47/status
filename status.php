@@ -8,21 +8,21 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              http://19h47.fr
- * @since             1.0.0
- * @package           Status
+ * @link				http://19h47.fr
+ * @since				1.0.0
+ * @package				Status
  *
  * @wordpress-plugin
- * Plugin Name:       Status
- * Plugin URI:        https://github.com/19h47/status
- * Description:       Tweet to WordPress Post
- * Version:           1.0.0
- * Author:            Jérémy Levron
- * Author URI:        http://19h47.fr
- * License:           GPL-2.0+
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       stts
- * Domain Path:       /languages
+ * Plugin Name:			Status
+ * Plugin URI:			https://github.com/19h47/status
+ * Description:			Tweet to WordPress Post
+ * Version:				1.0.0
+ * Author:				Jérémy Levron
+ * Author URI:			http://19h47.fr
+ * License:				GPL-2.0+
+ * License URI:			http://www.gnu.org/licenses/gpl-2.0.txt
+ * Text Domain:			stts
+ * Domain Path:			/languages
  */
 
 // If this file is called directly, abort.
@@ -83,7 +83,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-status.php';
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    1.0.0
+ * @since				1.0.0
  */
 function run_status() {
 

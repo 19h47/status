@@ -224,23 +224,29 @@ class Status {
 
 		$plugin_post_type = new Status_Admin_Post_Type( $this->get_plugin_name(), $this->get_version() );
 
-			$this->loader->add_action( 'init', $plugin_post_type, 'register_post_type' );
-			$this->loader->add_action( 'admin_head', $plugin_post_type, 'css' );
+		$this->loader->add_action( 'init', $plugin_post_type, 'register_post_type' );
+		$this->loader->add_action( 'admin_head', $plugin_post_type, 'css' );
 
-			$this->loader->add_filter( 'dashboard_glance_items', $plugin_post_type, 'at_a_glance' );
-			$this->loader->add_filter(
-				'manage_tweet_posts_columns',
-				$plugin_post_type,
-				'add_custom_columns'
-			);
+		$this->loader->add_filter( 'dashboard_glance_items', $plugin_post_type, 'at_a_glance' );
+		$this->loader->add_filter(
+			'manage_tweet_posts_columns',
+			$plugin_post_type,
+			'add_custom_columns'
+		);
 
-			$this->loader->add_action(
-				'manage_tweet_posts_custom_column',
-				$plugin_post_type,
-				'render_custom_columns',
-				10,
-				2
-			);
+		$this->loader->add_action(
+			'manage_tweet_posts_custom_column',
+			$plugin_post_type,
+			'render_custom_columns',
+			10,
+			2
+		);
+
+		$this->loader->add_action( 
+			'rest_api_init', 
+			$plugin_post_type,
+			'register_rest_route' 
+		);
 	}
 
 
