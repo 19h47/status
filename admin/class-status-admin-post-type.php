@@ -110,7 +110,7 @@ class Status_Admin_Post_Type {
 			'show_in_menu'			=> true,
 			'show_in_admin_bar'		=> true,
 			'show_in_rest'			=> true,
-			'rest_base'             => 'tweet',
+			'rest_base'             => 'tweets',
 			'menu_position'			=> 5,
 			'menu_icon'				=> 'dashicons-twitter',
 			'can_export'			=> true,
@@ -259,13 +259,40 @@ class Status_Admin_Post_Type {
 	/**
 	 * Register REST route
 	 */
-	function register_rest_route() {
+	function register_rest_route_status() {
 		register_rest_route( 
 			'wp/v2', 
-			'/tweet/', 
+			'/tweets/', 
 			array(
 				'methods'   => 'GET'
 			) 
 		);
+	}
+
+	/**
+	 * Register REST field
+	 */
+	function register_rest_field_status() {
+		// register_rest_field ( 'name-of-post-type', 'name-of-field-to-return', array-of-callbacks-and-schema() )
+		register_rest_field(
+			'tweet',
+			'meta',
+			array(
+				'get_callback'	=> array( $this, 'get_post_meta_status' ),
+				'schema'		=> null,
+			)
+		);
+	}
+	
+
+	/**
+	 * Get post meta
+	 */
+	function get_post_meta_status( $object ) {
+		//get the id of the post object array
+		$post_id = $object['id'];
+
+		//return the post meta
+		return get_post_meta( $post_id );
 	}
 }
