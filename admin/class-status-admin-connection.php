@@ -75,6 +75,10 @@ class Status_Admin_Connection {
 			$config['access']['token_secret']
 		);
 
+		if ($connection->getLastHttpCode() !== 200) {
+			return false;
+		}
+
 		$posts = get_posts(
 			array(
 				'meta_key' 			=> '_tweet_id',

@@ -270,9 +270,9 @@ class Status_Admin_Post_Type {
 	}
 
 	/**
-	 * Register REST field
+	 * Register REST field meta
 	 */
-	function register_rest_field_status() {
+	function register_rest_field_meta() {
 		// register_rest_field ( 'name-of-post-type', 'name-of-field-to-return', array-of-callbacks-and-schema() )
 		register_rest_field(
 			'tweet',
@@ -294,5 +294,35 @@ class Status_Admin_Post_Type {
 
 		//return the post meta
 		return get_post_meta( $post_id );
+	}
+
+
+	/**
+	 * Register REST route for unix timestamp date
+	 */
+	function register_rest_field_date_unix_timestamp() {
+		// register_rest_field ( 'name-of-post-type', 'name-of-field-to-return', array-of-callbacks-and-schema() )
+		register_rest_field(
+			'tweet',
+			'date_unix_timestamp',
+			array(
+				'get_callback'	=> array( $this, 'get_date_as_unix_timestamp' ),
+				'schema'		=> null,
+			)
+		);
+	}
+
+
+	/**
+	 * Get date as Unix Timestamp
+	 *
+	 * @return  
+	 */
+	function get_date_as_unix_timestamp( $object ) {
+		$post_id = $object['id'];
+
+		$date_unix_time_stamp = get_the_date( 'U', $post_id );
+
+		return $date_unix_time_stamp;
 	}
 }

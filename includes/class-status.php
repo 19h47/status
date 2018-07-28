@@ -251,7 +251,13 @@ class Status {
 		$this->loader->add_action( 
 			'rest_api_init', 
 			$plugin_post_type,
-			'register_rest_field_status' 
+			'register_rest_field_meta' 
+		);
+
+		$this->loader->add_action( 
+			'rest_api_init', 
+			$plugin_post_type,
+			'register_rest_field_date_unix_timestamp' 
 		);
 	}
 
