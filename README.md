@@ -10,7 +10,7 @@ __Status__ allow you to turn your tweets into a custom post type Tweet.
 
 ## Installation
 
-### Dependencies
+## Dependencies
 
 The plugin uses the most popular [PHP library for the Twitter OAuth REST API](https://github.com/abraham/twitteroauth).
 
@@ -18,14 +18,46 @@ The plugin uses the most popular [PHP library for the Twitter OAuth REST API](ht
 composer require abraham/twitteroauth
 ```
 
-### Config
+## Config
 
 Locate the `config-sample.json`, fill it with your personal informations and then saving it as `config.json`.
 
-### Plugin
+## Plugin
 
 - Upload the folder `status` to the `/wp-content/plugins/` directory
 - Activate the plugin through the __Plugins__ menu in WordPress
+
+## PHPCS
+
+### Install the WordPress rules
+
+Add __PHP_CodeSniffer__ to the `composer.json` file
+
+```json
+{
+    "require": {
+        "squizlabs/php_codesniffer": "*"
+    }
+}
+```
+
+Then update dependencies
+
+```bash
+composer update
+```
+
+Create the project
+
+```bash
+Make create-project
+```
+
+### Add the Rules to PHP CodeSniffer
+
+```bash
+Make config-set
+```
 
 ## References
 

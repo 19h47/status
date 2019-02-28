@@ -1,18 +1,16 @@
 <?php
-
 /**
  * The file that defines the core plugin class
  *
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
  *
- * @link       http://19h47.fr
+ * @link       https://github.com/19h47/status
  * @since      1.0.0
  *
  * @package    Status
  * @subpackage Status/includes
  */
-
 
 /**
  * The core plugin class.
@@ -26,7 +24,7 @@
  * @since      1.0.0
  * @package    Status
  * @subpackage Status/includes
- * @author     Jérémy Levron <jeremylevron@19h47.fr>
+ * @author     Jérémy Levron <jeremylevron@19h47.fr> (http://19h47.fr)
  */
 class Status {
 
@@ -44,9 +42,9 @@ class Status {
 	/**
 	 * The unique identifier of this plugin.
 	 *
-	 * @since    1.0.0
-	 * @access   protected
-	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
+	 * @since  1.0.0
+	 * @access protected
+	 * @var    str    $plugin_name    The string used to uniquely identify this plugin.
 	 */
 	protected $plugin_name;
 
@@ -54,9 +52,9 @@ class Status {
 	/**
 	 * The current version of the plugin.
 	 *
-	 * @since    1.0.0
-	 * @access   protected
-	 * @var      string    $version    The current version of the plugin.
+	 * @since  1.0.0
+	 * @access protected
+	 * @var    str    $version    The current version of the plugin.
 	 */
 	protected $version;
 
@@ -64,10 +62,21 @@ class Status {
 	/**
 	 * Config
 	 *
-	 * @since    1.0.0
-	 * @access   protected
+	 * @since  1.0.0
+	 * @access protected
+	 * @var    arr
 	 */
 	protected $config;
+
+
+	/**
+	 * Tweets
+	 *
+	 * @since  2.0.0
+	 * @access public
+	 * @var    arr
+	 */
+	public $tweets;
 
 
 	/**
@@ -86,10 +95,7 @@ class Status {
 			$this->version = '1.0.0';
 		}
 		$this->plugin_name = 'status';
-		$this->config = json_decode(
-			file_get_contents( __DIR__ . '/../config.json' ),
-			true
-		);
+		$this->config      = $this->get_config();
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -98,8 +104,12 @@ class Status {
 		$this->define_metabox_hooks();
 		$this->define_post_type_hooks();
 		$this->define_taxonomy_hooks();
-		$this->define_connection();
-		$this->define_insert_post();
+
+		$this->loader->add_action(
+			'import_tweets_as_posts',
+			$this,
+			'schedule_action'
+		);
 	}
 
 
@@ -116,8 +126,8 @@ class Status {
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
 	 *
-	 * @since    1.0.0
-	 * @access   private
+	 * @since  1.0.0
+	 * @access private
 	 */
 	private function load_dependencies() {
 
@@ -126,13 +136,11 @@ class Status {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/status-global-functions.php';
 
-
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-status-loader.php';
-
 
 		/**
 		 * The class responsible for defining internationalization functionality
@@ -140,42 +148,28 @@ class Status {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-status-i18n.php';
 
-
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-status-admin.php';
-
 
 		/**
 		 * The class responsible for defining all actions relating to metaboxes.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-status-admin-metaboxes.php';
 
-
 		/**
 		 * The class responsible for defining all actions relating to post type.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-status-admin-post-type.php';
-
 
 		/**
 		 * The class responsible for defining all actions relating to taxonomy.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-status-admin-taxonomy.php';
 
-
-		/**
-		 * The class responsible for defining connection
-		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-status-admin-connection.php';
-
-
-		/**
-		 * The class responsible for defining connection
-		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-status-admin-insert-post.php';
-
 
 		$this->loader = new Status_Loader();
 	}
@@ -191,7 +185,6 @@ class Status {
 	 * @access   private
 	 */
 	private function set_locale() {
-
 		$plugin_i18n = new Status_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
@@ -206,7 +199,6 @@ class Status {
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
-
 		$plugin_admin = new Status_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
@@ -221,7 +213,6 @@ class Status {
 	 * @access   private
 	 */
 	private function define_post_type_hooks() {
-
 		$plugin_post_type = new Status_Admin_Post_Type( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'init', $plugin_post_type, 'register_post_type' );
@@ -242,22 +233,22 @@ class Status {
 			2
 		);
 
-		$this->loader->add_action( 
-			'rest_api_init', 
+		$this->loader->add_action(
+			'rest_api_init',
 			$plugin_post_type,
-			'register_rest_route_status' 
+			'register_rest_route_status'
 		);
 
-		$this->loader->add_action( 
-			'rest_api_init', 
+		$this->loader->add_action(
+			'rest_api_init',
 			$plugin_post_type,
-			'register_rest_field_meta' 
+			'register_rest_field_meta'
 		);
 
-		$this->loader->add_action( 
-			'rest_api_init', 
+		$this->loader->add_action(
+			'rest_api_init',
 			$plugin_post_type,
-			'register_rest_field_date_unix_timestamp' 
+			'register_rest_field_date_unix_timestamp'
 		);
 	}
 
@@ -269,7 +260,6 @@ class Status {
 	 * @access   private
 	 */
 	private function define_taxonomy_hooks() {
-
 		$plugin_taxonomy = new Status_Admin_Taxonomy( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'init', $plugin_taxonomy, 'register_taxonomy', 0 );
@@ -277,45 +267,44 @@ class Status {
 
 
 	/**
-	 * @since    1.0.0
-	 * @access   private
+	 * Define connection
+	 *
+	 * @since  1.0.0
+	 * @access public
 	 */
-	private function define_connection() {
-
+	 function schedule_action() {
 		$plugin_connection = new Status_Admin_Connection(
 			$this->get_plugin_name(),
 			$this->get_version()
 		);
 
-		$this->tweets = $plugin_connection::connection( $this->config );
+		$this->tweets = $plugin_connection->connection( $this->get_config() );
+
+		$plugin_insert_post = new Status_Admin_Insert_Post(
+			$this->get_plugin_name(),
+			$this->get_version()
+		);
+
+		return $plugin_insert_post->insert_post( $this->tweets );
 	}
 
 
 	/**
+	 * Define insert post
+	 *
 	 * @since  1.0.0
-	 * @access private
+	 * @access public
 	 */
-	private function define_insert_post() {
+	public function insert_post() {
 
-		$plugin_insert_post = new Status_Admin_Insert_Post(
-			$this->get_plugin_name(),
-			$this->get_version(),
-			$this->tweets
-		);
-
-		$this->loader->add_action(
-			'import_tweets_as_posts',
-			$plugin_insert_post,
-			'insert_post'
-		);
 	}
 
 
 	/**
 	 * Register all of the hooks related to metaboxes
 	 *
-	 * @since 		1.0.0
-	 * @access 		private
+	 * @since  1.0.0
+	 * @access private
 	 */
 	private function define_metabox_hooks() {
 
@@ -365,9 +354,27 @@ class Status {
 	 * Retrieve the version number of the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    string    The version number of the plugin.
+	 * @return    str    The version number of the plugin.
 	 */
 	public function get_version() {
 		return $this->version;
+	}
+
+
+	/**
+	 * Get config
+	 *
+	 * @since 2.0.0
+	 * @return arr
+	 * @access public
+	 */
+	public function get_config() {
+		if ( ! is_admin() ) {
+			return false;
+		}
+
+		$request = wp_remote_get( plugins_url() . '/status/config.json' );
+
+		return json_decode( wp_remote_retrieve_body( $request ), true );
 	}
 }

@@ -1,5 +1,4 @@
 <?php
-
 /**
  *
  * Provide the view for the thumbnail column
@@ -8,7 +7,7 @@
  * @since 		1.0.0
  *
  * @package 	Status
- * @subpackage 	Status/admin/partials
+ * @subpackage 	status/admin/partials
  *
  */
 

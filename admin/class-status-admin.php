@@ -1,15 +1,13 @@
 <?php
-
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link		http://19h47.fr
- * @since		1.0.0
+ * @link https://github.com/19h47/status
+ * @since 1.0.0
  *
- * @package		Status
- * @subpackage	Status/admin
+ * @package Status
+ * @subpackage status/admin
  */
-
 
 /**
  * The admin-specific functionality of the plugin.
@@ -17,18 +15,18 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package		Status
- * @subpackage	Status/admin
- * @author		Jérémy Levron <jeremylevron@19h47.fr>
+ * @package Status
+ * @subpackage status/admin
+ * @author Jérémy Levron <jeremylevron@19h47.fr> (http://19h47.fr)
  */
 class Status_Admin {
 
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since	1.0.0
-	 * @access	private
-	 * @var		string	$plugin_name	The ID of this plugin.
+	 * @since 1.0.0
+	 * @access private
+	 * @var str $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
@@ -36,9 +34,9 @@ class Status_Admin {
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since	1.0.0
-	 * @access	private
-	 * @var		string	$version	The current version of this plugin.
+	 * @since 1.0.0
+	 * @access private
+	 * @var str $version The current version of this plugin.
 	 */
 	private $version;
 
@@ -46,27 +44,27 @@ class Status_Admin {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since	1.0.0
-	 * @param	string	$plugin_name		The name of this plugin.
-	 * @param	string	$version	The version of this plugin.
+	 * @since 1.0.0
+	 * @param str $plugin_name The name of this plugin.
+	 * @param str $version The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
-
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 	}
 
 
 	/**
 	 * Register the stylesheets for the admin area.
 	 *
-	 * @since	1.0.0
+	 * @since 1.0.0
+	 * @access public
 	 */
 	public function enqueue_styles() {
 		global $typenow;
 
 		if ( 'tweet' !== $typenow ) {
-			return;
+			return false;
 		}
 
 		wp_enqueue_style(
@@ -83,20 +81,22 @@ class Status_Admin {
 	/**
 	 * Register the JavaScript for the admin area.
 	 *
-	 * @since	1.0.0
+	 * @since 1.0.0
+	 * @access public
 	 */
 	public function enqueue_scripts() {
 		global $typenow;
 
 		if ( 'tweet' !== $typenow ) {
-			return;
+			return false;
 		}
 
 		wp_enqueue_script(
 			$this->plugin_name,
 			plugin_dir_url( __FILE__ ) . 'js/status-admin.js',
 			array( 'jquery' ),
-			$this->version, false
+			$this->version,
+			false
 		);
 	}
 }

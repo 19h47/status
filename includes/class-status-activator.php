@@ -1,15 +1,13 @@
 <?php
-
 /**
  * Fired during plugin activation
  *
- * @link       http://19h47.fr
+ * @link       https://github.com/19h47/status
  * @since      1.0.0
  *
  * @package    Status
- * @subpackage Status/includes
+ * @subpackage status/includes
  */
-
 
 /**
  * Fired during plugin activation.
@@ -19,7 +17,7 @@
  * @since      1.0.0
  * @package    Status
  * @subpackage Status/includes
- * @author     Jérémy Levron <jeremylevron@19h47.fr>
+ * @author     Jérémy Levron <jeremylevron@19h47.fr> (http://19h47.fr)
  */
 class Status_Activator {
 
@@ -31,8 +29,12 @@ class Status_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
-		if ( wp_next_scheduled( 'import_tweets_as_posts' ) ) return;
+		if ( wp_next_scheduled( 'import_tweets_as_posts' ) ) {
+			return false;
+		}
 
-	    wp_schedule_event( time(), 'hourly', 'import_tweets_as_posts' );
+		do_action('import_tweets_as_posts');
+
+		return wp_schedule_event( time(), 'hourly', 'import_tweets_as_posts' );
 	}
 }

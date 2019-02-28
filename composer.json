@@ -1,5 +1,14 @@
 {
     "require": {
-        "abraham/twitteroauth": "^0.7.4"
-    }
+        "abraham/twitteroauth": "^1.0.1",
+        "squizlabs/php_codesniffer": "*",
+        "phpcompatibility/phpcompatibility-wp": "*"
+    },
+    "scripts": {
+		"lint": "vendor/bin/phpcs --standard=WordPress"
+	},
+    "support"    : {
+		"issues": "https://github.com/19h47/status/issues",
+		"source": "https://github.com/19h47/status"
+	}
 }

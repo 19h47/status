@@ -1,9 +1,8 @@
 <?php
-
 /**
  * Globally-accessible functions
  *
- * @link       	http://19h47.fr
+ * @link       	https://github.com/19h47/status
  * @since 		1.0.0
  *
  * @package    	Status
@@ -15,11 +14,11 @@ if ( ! function_exists( 'insert_attachment_from_url' ) ) :
 /**
  * Insert an attachment from an URL address.
  *
- * @param  	str 	$url
- * @param  	int  	$post_id
- * @param  	arr  	$meta_data
- * @return 	int  	Attachment ID
- * @author  Miroslav Mitev
+ * @param  str $url
+ * @param  int $post_id
+ * @param  arr $meta_data
+ * @return int Attachment ID
+ * @author Miroslav Mitev
  * @see https://gist.github.com/m1r0/f22d5237ee93bcccb0d9
  */
 function insert_attachment_from_url( $url, $post_id = null ) {

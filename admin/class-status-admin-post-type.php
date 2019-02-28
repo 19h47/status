@@ -1,31 +1,29 @@
 <?php
-
 /**
  * The post type of the plugin.
  *
- * @link		http://19h47.fr
- * @since		1.0.0
+ * @link https://github.com/19h47/status
+ * @since 1.0.0
  *
- * @package		Status
- * @subpackage	Status/admin
+ * @package Status
+ * @subpackage status/admin
  */
 
-
 /**
  * The post type of the plugin.
  *
- * @package		Status
- * @subpackage	Status/admin
- * @author		Jérémy Levron <jeremylevron@19h47.fr>
+ * @package Status
+ * @subpackage Status/admin
+ * @author Jérémy Levron <jeremylevron@19h47.fr> (http://19h47.fr)
  */
 class Status_Admin_Post_Type {
 
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since		1.0.0
-	 * @access		private
-	 * @var			string			$plugin_name		The ID of this plugin.
+	 * @since 1.0.0
+	 * @access private
+	 * @var string $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
@@ -33,9 +31,9 @@ class Status_Admin_Post_Type {
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since		1.0.0
-	 * @access		private
-	 * @var			string			$version			The current version of this plugin.
+	 * @since 1.0.0
+	 * @access private
+	 * @var string $version The current version of this plugin.
 	 */
 	private $version;
 
@@ -43,91 +41,92 @@ class Status_Admin_Post_Type {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since		1.0.0
-	 * @param		string			$plugin_name		The name of this plugin.
-	 * @param		string			$version			The version of this plugin.
+	 * @since 1.0.0
+	 * @param string $plugin_name The name of this plugin.
+	 * @param string $version The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
-
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
+
+		add_theme_support( 'post-thumbnails' );
 	}
 
 
 	/**
 	 * Register Custom Post Type
 	 *
-	 * @since		1.0.0
-	 * @access		public
-	 * @uses		register_post_type()
+	 * @since 1.0.0
+	 * @access public
+	 * @uses register_post_type()
 	 */
 	public static function register_post_type() {
 		$labels = array(
-			'name'					=> _x( 'Tweets', 'Tweet pluriel', $this->plugin_name ),
-			'singular_name'			=> _x( 'Tweet', 'Tweet singulier', $this->plugin_name ),
-			'menu_name'				=> __( 'Tweets', $this->plugin_name ),
-			'name_admin_bar'		=> __( 'Tweet', $this->plugin_name ),
-			'parent_item_colon'		=> __( '', $this->plugin_name ),
-			'all_items'				=> __( 'Tous les tweets', $this->plugin_name ),
-			'add_new_item'			=> __( 'Ajouter un tweet', $this->plugin_name ),
-			'add_new'				=> __( 'Ajouter', $this->plugin_name ),
-			'new_item'				=> __( 'Nouveau tweet', $this->plugin_name ),
-			'edit_item'				=> __( 'Modifier le tweet', $this->plugin_name ),
-			'update_item'			=> __( 'Mettre à jour le tweet', $this->plugin_name ),
-			'view_item'				=> __( 'Voir le tweet', $this->plugin_name ),
-			'view_items'			=> __( 'Voir les tweets', $this->plugin_name ),
-			'search_items'			=> __( 'Chercher parmi les tweets', $this->plugin_name ),
-			'not_found'				=> __( 'Aucun tweet trouvé.', $this->plugin_name ),
-			'not_found_in_trash'		=> __( 'Aucun tweet trouvé dans la corbeille.', $this->plugin_name ),
-			'featured_image'		=> __( 'Image à la une', $this->plugin_name ),
-			'set_featured_image'		=> __( 'Mettre une image à la une', $this->plugin_name ),
-			'remove_featured_image' => __( 'Retirer l\'image mise à la une', $this->plugin_name ),
-			'use_featured_image'		=> __( 'Mettre une image à la une', $this->plugin_name ),
-			'insert_into_item'		=> __( 'Insérer dans le tweet', $this->plugin_name ),
-			'uploaded_to_this_item' => __( 'Ajouter à ce tweet', $this->plugin_name ),
-			'items_list'			=> __( 'Liste des tweets', $this->plugin_name ),
-			'items_list_navigation'	=> __( 'Navigation de liste des tweets', $this->plugin_name ),
-			'filter_items_list'		=> __( 'Filtrer la liste des tweets', $this->plugin_name ),
+			'name'                  => _x( 'Tweets', 'Tweet pluriel', 'status' ),
+			'singular_name'         => _x( 'Tweet', 'Tweet singulier', 'status' ),
+			'menu_name'             => __( 'Tweets', 'status' ),
+			'name_admin_bar'        => __( 'Tweet', 'status' ),
+			'all_items'             => __( 'Tous les tweets', 'status' ),
+			'add_new_item'          => __( 'Ajouter un tweet', 'status' ),
+			'add_new'               => __( 'Ajouter', 'status' ),
+			'new_item'              => __( 'Nouveau tweet', 'status' ),
+			'edit_item'             => __( 'Modifier le tweet', 'status' ),
+			'update_item'           => __( 'Mettre à jour le tweet', 'status' ),
+			'view_item'             => __( 'Voir le tweet', 'status' ),
+			'view_items'            => __( 'Voir les tweets', 'status' ),
+			'search_items'          => __( 'Chercher parmi les tweets', 'status' ),
+			'not_found'             => __( 'Aucun tweet trouvé.', 'status' ),
+			'not_found_in_trash'    => __( 'Aucun tweet trouvé dans la corbeille.', 'status' ),
+			'featured_image'        => __( 'Image à la une', 'status' ),
+			'set_featured_image'    => __( 'Mettre une image à la une', 'status' ),
+			'remove_featured_image' => __( 'Retirer l\'image mise à la une', 'status' ),
+			'use_featured_image'    => __( 'Mettre une image à la une', 'status' ),
+			'insert_into_item'      => __( 'Insérer dans le tweet', 'status' ),
+			'uploaded_to_this_item' => __( 'Ajouter à ce tweet', 'status' ),
+			'items_list'            => __( 'Liste des tweets', 'status' ),
+			'items_list_navigation' => __( 'Navigation de liste des tweets', 'status' ),
+			'filter_items_list'     => __( 'Filtrer la liste des tweets', 'status' ),
 		);
 
 		$rewrite = array(
-			'slug'					=> 'tweets',
-			'with_front'			=> true,
-			'pages'					=> true,
-			'feeds'					=> true,
+			'slug'       => 'tweets',
+			'with_front' => true,
+			'pages'      => true,
+			'feeds'      => false,
 		);
 
 		$args = array(
-			'label'					=> 'tweet',
-			'description'			=> __( 'Les tweets', $this->plugin_name ),
-			'labels'				=> $labels,
-			'supports'				=> array( 'title', 'editor', 'author', 'thumbnail' ),
-			// 'taxonomies'			=> array( 'category' ),
-			'hierarchical'			=> false,
-			'public'				=> true,
-			'show_ui'				=> true,
-			'show_in_nav_menus'		=> true,
-			'show_in_menu'			=> true,
-			'show_in_admin_bar'		=> true,
-			'show_in_rest'			=> true,
-			'rest_base'             => 'tweets',
-			'menu_position'			=> 5,
-			'menu_icon'				=> 'dashicons-twitter',
-			'can_export'			=> true,
-			'has_archive'			=> true,
-			'exclude_from_search'	=> false,
-			'publicly_queryable'	=> true,
-			'rewrite'				=> $rewrite,
-			'capability_type'		=> 'post',
+			'label'               => 'tweet',
+			'description'         => __( 'Les tweets', 'status' ),
+			'labels'              => $labels,
+			'supports'            => array( 'title', 'editor', 'author', 'thumbnail' ),
+			'taxonomies'          => array( 'hashtag' ),
+			'hierarchical'        => false,
+			'public'              => true,
+			'show_ui'             => true,
+			'show_in_nav_menus'   => true,
+			'show_in_menu'        => true,
+			'show_in_admin_bar'   => true,
+			'show_in_rest'        => true,
+			'rest_base'           => 'tweets',
+			'menu_position'       => 5,
+			'menu_icon'           => 'dashicons-twitter',
+			'can_export'          => true,
+			'has_archive'         => true,
+			'exclude_from_search' => false,
+			'publicly_queryable'  => true,
+			'rewrite'             => $rewrite,
+			'capability_type'     => 'post',
 		);
 		register_post_type( 'tweet', $args );
 	}
 
 
 	/**
-	 * css
+	 * CSS
 	 *
-	 * @since		1.0.0
+	 * @since 1.0.0
+	 * @access public
 	 */
 	public function css() {
 		?>
@@ -151,19 +150,19 @@ class Status_Admin_Post_Type {
 				display: inline-block;
 				vertical-align: middle;
 
-				height: auto;
+				object-fit: cover;
+				object-position: center;
 			}
 		</style>
-	<?php
+		<?php
 	}
 
 
 	/**
 	 * Add custom columns
 	 *
-	 * @since		1.0.0
-	 * @param		$columns
-	 * @param		$new_columns
+	 * @since 1.0.0
+	 * @param arr $columns An array of column name ⇒ label. The name is passed to functions to identify the column. The label is shown as the column header.
 	 */
 	public function add_custom_columns( $columns ) {
 		global $typenow;
@@ -173,14 +172,14 @@ class Status_Admin_Post_Type {
 		}
 
 		$new_columns = array();
-		$keys = array_keys( $columns );
+		$keys        = array_keys( $columns );
 
-		foreach( $columns as $key => $value ) {
-			if ( $key === 'title' ) {
+		foreach ( $columns as $key => $value ) {
+			if ( 'title' === $key ) {
 				$new_columns['thumbnail'] = __( 'Image' );
 			}
 
-			$new_columns[$key] = $value;
+			$new_columns[ $key ] = $value;
 		}
 		return $new_columns;
 	}
@@ -189,10 +188,10 @@ class Status_Admin_Post_Type {
 	/**
 	 * Render custom columns
 	 *
-	 * @since		1.0.0
-	 * @param		$column_name
-	 * @param		$post_id
-	 * @return		void
+	 * @since 1.0.0
+	 * @param arr $column_name The name of the column to display.
+	 * @param int $post_id The ID of the current post. Can also be taken from the global $post->ID.
+	 * @return void
 	 */
 	public function render_custom_columns( $column_name, $post_id ) {
 		global $typenow;
@@ -202,7 +201,7 @@ class Status_Admin_Post_Type {
 		}
 
 		switch ( $column_name ) {
-			case 'thumbnail' :
+			case 'thumbnail':
 				$post_thumbnail = get_the_post_thumbnail(
 					$post_id,
 					array( 60, 60 ),
@@ -219,17 +218,17 @@ class Status_Admin_Post_Type {
 	/**
 	 * "At a glance" items (dashboard widget): add the tweet.
 	 *
-	 * @since		1.0.0
-	 * @param		$items
-	 * @return		$items
+	 * @since 1.0.0
+	 * @param arr $items Array of items.
+	 * @return $items
 	 */
 	public function at_a_glance( $items ) {
-		$post_type = 'tweet';
+		$post_type   = 'tweet';
 		$post_status = 'publish';
-		$object = get_post_type_object( $post_type );
+		$object      = get_post_type_object( $post_type );
 
 		$num_posts = wp_count_posts( $post_type );
-		if ( ! $num_posts || ! isset ( $num_posts->{$post_status} ) || 0 === (int) $num_posts->{$post_status} ) {
+		if ( ! $num_posts || ! isset( $num_posts->{$post_status} ) || 0 === (int) $num_posts->{$post_status} ) {
 			return $items;
 		}
 
@@ -242,11 +241,11 @@ class Status_Admin_Post_Type {
 		);
 
 		if ( current_user_can( $object->cap->edit_posts ) ) {
-			$items[] = sprintf( 
-				'<a class="%1$s-count" href="edit.php?post_status=%2$s&post_type=%1$s">%3$s</a>', 
-				$post_type, 
-				$post_status, 
-				$text 
+			$items[] = sprintf(
+				'<a class="%1$s-count" href="edit.php?post_status=%2$s&post_type=%1$s">%3$s</a>',
+				$post_type,
+				$post_status,
+				$text
 			);
 		} else {
 			$items[] = sprintf( '<span class="%1$s-count">%s</span>', $text );
@@ -258,56 +257,67 @@ class Status_Admin_Post_Type {
 
 	/**
 	 * Register REST route
+	 *
+	 * @access public
 	 */
-	function register_rest_route_status() {
-		register_rest_route( 
-			'wp/v2', 
-			'/tweets/', 
+	public function register_rest_route_status() {
+		register_rest_route(
+			'wp/v2',
+			'/tweets/',
 			array(
-				'methods'   => 'GET'
-			) 
+				'methods' => 'GET',
+			)
 		);
 	}
 
 	/**
 	 * Register REST field meta
+	 *
+	 * Doc: register_rest_field ( 'name-of-post-type', 'name-of-field-to-return', array-of-callbacks-and-schema() )
+	 *
+	 * @access public
 	 */
-	function register_rest_field_meta() {
-		// register_rest_field ( 'name-of-post-type', 'name-of-field-to-return', array-of-callbacks-and-schema() )
+	public function register_rest_field_meta() {
 		register_rest_field(
 			'tweet',
 			'meta',
 			array(
-				'get_callback'	=> array( $this, 'get_post_meta_status' ),
-				'schema'		=> null,
+				'get_callback' => array( $this, 'get_post_meta_status' ),
+				'schema'       => null,
 			)
 		);
 	}
-	
+
 
 	/**
 	 * Get post meta
+	 *
+	 * @param arr $array Array.
+	 * @access public
 	 */
-	function get_post_meta_status( $object ) {
-		//get the id of the post object array
-		$post_id = $object['id'];
+	public function get_post_meta_status( $array ) {
+		// Get the id of the post object array.
+		$post_id = $array['id'];
 
-		//return the post meta
+		// Return the post meta.
 		return get_post_meta( $post_id );
 	}
 
 
 	/**
 	 * Register REST route for unix timestamp date
+	 *
+	 * Doc: register_rest_field ( 'name-of-post-type', 'name-of-field-to-return', array-of-callbacks-and-schema() )
+	 *
+	 * @access public
 	 */
-	function register_rest_field_date_unix_timestamp() {
-		// register_rest_field ( 'name-of-post-type', 'name-of-field-to-return', array-of-callbacks-and-schema() )
+	public function register_rest_field_date_unix_timestamp() {
 		register_rest_field(
 			'tweet',
 			'date_unix_timestamp',
 			array(
-				'get_callback'	=> array( $this, 'get_date_as_unix_timestamp' ),
-				'schema'		=> null,
+				'get_callback' => array( $this, 'get_date_as_unix_timestamp' ),
+				'schema'       => null,
 			)
 		);
 	}
@@ -316,10 +326,12 @@ class Status_Admin_Post_Type {
 	/**
 	 * Get date as Unix Timestamp
 	 *
-	 * @return  
+	 * @param arr $array Array.
+	 * @access public
+	 * @return $date_unix_time_stamp
 	 */
-	function get_date_as_unix_timestamp( $object ) {
-		$post_id = $object['id'];
+	public function get_date_as_unix_timestamp( $array ) {
+		$post_id = $array['id'];
 
 		$date_unix_time_stamp = get_the_date( 'U', $post_id );
 

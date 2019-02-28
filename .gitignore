@@ -1,6 +1,5 @@
 /node_modules/
 /dist/
 /vendor/
-config.php
+/wpcs/
 config.json
-sftp-config.json
