@@ -92,7 +92,7 @@ class Status_Admin_Connection {
 			}
 		}
 
-		$user = $connection->get( 'users/show', [ 'screen_name' => $config['screen_name'] ] );
+		$user = $connection->get( 'users/show', array( 'screen_name' => $config['screen_name'] ) );
 
 		$args_content = array(
 			'screen_name' => $config['screen_name'],

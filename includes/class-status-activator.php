@@ -33,7 +33,7 @@ class Status_Activator {
 			return false;
 		}
 
-		do_action('import_tweets_as_posts');
+		do_action( 'import_tweets_as_posts' );
 
 		return wp_schedule_event( time(), 'hourly', 'import_tweets_as_posts' );
 	}

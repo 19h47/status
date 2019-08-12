@@ -233,7 +233,7 @@ class Status_Admin_Post_Type {
 		}
 
 		$text = sprintf(
-			_n( '%1$s %4$s%2$s', '%1$s %4$s%3$s', $num_posts->{$post_status} ),
+			_n( '%1$s %4$s%2$s', '%1$s %4$s%3$s', $num_posts->{$post_status} ), // phpcs:ignore
 			number_format_i18n( $num_posts->{$post_status} ),
 			strtolower( $object->labels->singular_name ),
 			strtolower( $object->labels->name ),

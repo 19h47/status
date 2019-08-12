@@ -25,7 +25,7 @@
  * @subpackage Status/includes
  * @author     Jérémy Levron <jeremylevron@19h47.fr>
  */
-class Status_i18n {
+class Status_I18n {
 
 
 	/**

@@ -119,7 +119,7 @@ class Status {
 	 * Include the following files that make up the plugin:
 	 *
 	 * - Status_Loader. Orchestrates the hooks of the plugin.
-	 * - Status_i18n. Defines internationalization functionality.
+	 * - Status_I18n. Defines internationalization functionality.
 	 * - Status_Admin. Defines all hooks for the admin area.
 	 * - Status_Public. Defines all hooks for the public side of the site.
 	 *
@@ -178,14 +178,14 @@ class Status {
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Status_i18n class in order to set the domain and to register the hook
+	 * Uses the Status_I18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
 	 * @access   private
 	 */
 	private function set_locale() {
-		$plugin_i18n = new Status_i18n();
+		$plugin_i18n = new Status_I18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 	}
@@ -272,7 +272,7 @@ class Status {
 	 * @since  1.0.0
 	 * @access public
 	 */
-	 function schedule_action() {
+	function schedule_action() {
 		$plugin_connection = new Status_Admin_Connection(
 			$this->get_plugin_name(),
 			$this->get_version()

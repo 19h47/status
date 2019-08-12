@@ -3,11 +3,11 @@
  *
  * Provide the view for the thumbnail column
  *
- * @link 		http://19h47.fr
- * @since 		1.0.0
+ * @link http://19h47.fr
+ * @since 1.0.0
  *
- * @package 	Status
- * @subpackage 	status/admin/partials
+ * @package Status
+ * @subpackage status/admin/partials
  *
  */
 
